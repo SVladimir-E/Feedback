@@ -1,5 +1,3 @@
-import Inputmask from "inputmask";
-
 const form = document.getElementById("feedback");
 const true_url = "https://60376bfd5435040017722533.mockapi.io/form";
 const false_url = "https://60376bfd5435040017722533.mockapi.io/formRej";
@@ -7,13 +5,11 @@ const checkBox = document.getElementById("checkbox");
 const regName = /^[А-ЯЁа-яё]*(\s[А-ЯЁа-яё]*){2}$/i;
 const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]$/i;
 const regTel = /^\+7\s\d{3}\s\d{3}-\d{2}-\d{2}$/;
-const phoneInput = document.getElementById("phone-input");
 
 let isChecked = false;
 
 checkBox.addEventListener("change", (event) => {
   isChecked = event.target.checked;
-  console.log(event.target.checked);
 });
 
 form.addEventListener("submit", async (event) => {
@@ -42,11 +38,11 @@ form.addEventListener("submit", async (event) => {
 
   let result = await response.json();
 
-  if (response.status > 199 && response.status < 300) {
+  if (response.status >= 200 && response.status < 400) {
     alert(result.text);
-  } else if (response.status >= 399) {
+  } else if (response.status >= 400) {
     alert(`Ошибка : ${response.status}`);
   }
 });
 
-Inputmask({ mask: "+7 999 999-99-99" }).mask(phoneInput);
+Inputmask().mask(document.querySelectorAll("input"));

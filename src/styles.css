@@ -96,6 +96,7 @@ html {
   align-items: center;
   text-align: center;
   color: #ffffff;
+  text-transform: uppercase;
 }
 
 .url-toggle {
